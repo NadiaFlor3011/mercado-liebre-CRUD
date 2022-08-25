@@ -51,7 +51,7 @@ const controller = {
 
         let productsModify = [...products, newProduct];
         saveProducts(productsModify);
-        res.redirect('/products/products')
+        res.redirect('/products')
     },
 
     // Update - Form to edit
@@ -82,7 +82,7 @@ const controller = {
                 }
 
             }
-            return products;
+            return product;
 
         });
         saveProducts(productsModify);
@@ -92,7 +92,11 @@ const controller = {
 
     // Delete - Delete one product from DB
     destroy: (req, res) => {
-        res.render('index')
+        let { id } = req.params;
+        let productsModify = products.filter(product => product.id !== +id)
+        saveProducts(productsModify);
+        res.redirect('/products');
+
     }
 };
 
